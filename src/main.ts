@@ -10,6 +10,7 @@ import * as BABYLON from "@babylonjs/core";
 
 import "./style.css";
 import { Field } from "./model/field";
+import { Player } from "./model/player";
 
 /**
  * Setup Scene , Camera and etc
@@ -39,9 +40,9 @@ interface MyBox extends BABYLON.Mesh {
   material: BABYLON.StandardMaterial;
 }
 const box = MeshBuilder.CreateBox("box", { size: 1 }, scene) as MyBox;
-box.position.y = box.getBoundingInfo().maximum.y / 2;
 box.material = new BABYLON.StandardMaterial("mat", scene);
 box.material.diffuseColor = BABYLON.Color3.Red();
+const player = new Player(scene, engine);
 
 /**
  * Render Loop
