@@ -56,7 +56,7 @@ const enemyGenerator = new EnemyGenerator(scene, engine);
 engine.runRenderLoop(() => {
   scene.render();
   collisionController.applyCollision();
-  enemyGenerator.update();
+  enemyGenerator.update(player);
   gui.update();
 });
 

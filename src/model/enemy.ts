@@ -10,6 +10,7 @@ export class Enemy implements CollisionHandler {
   scene: BABYLON.Scene;
   engine: BABYLON.Engine;
   score: number = 10;
+  move: (delta: number) => void;
 
   constructor(scene: BABYLON.Scene, engine: BABYLON.Engine) {
     Enemy.enemies.push(this);
@@ -24,6 +25,12 @@ export class Enemy implements CollisionHandler {
     this.mesh.material = new BABYLON.StandardMaterial("mat", scene);
     this.mesh.material.diffuseColor = BABYLON.Color3.Red();
     this.mesh.actionManager = new BABYLON.ActionManager(scene);
+    this.move = () => {};
+
+    scene.onBeforeRenderObservable.add(() => {
+      const delta = this.engine.getDeltaTime() / 60;
+      this.move(delta);
+    });
   }
 
   collisionHandler(object: any) {
