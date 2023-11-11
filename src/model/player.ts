@@ -2,6 +2,7 @@ import * as BABYLON from "@babylonjs/core";
 
 import { StandardMaterialBox } from "../types/StandardMaterialBox";
 import { getRelativeDirection } from "../utils/getRelativeDirection";
+import { Bullet } from "./bullet";
 
 enum Key {
   W,
@@ -10,6 +11,7 @@ enum Key {
   D,
   Q,
   E,
+  SPACE,
 }
 
 export class Player {
@@ -67,6 +69,9 @@ export class Player {
           case "e":
             this.pressed_key.add(Key.E);
             break;
+          case " ":
+            this.pressed_key.add(Key.SPACE);
+            break;
         }
         break;
       case BABYLON.KeyboardEventTypes.KEYUP:
@@ -89,6 +94,9 @@ export class Player {
           case "e":
             this.pressed_key.delete(Key.E);
             break;
+          case " ":
+            this.pressed_key.delete(Key.SPACE);
+            break;
         }
         break;
     }
@@ -98,6 +106,7 @@ export class Player {
     const delta = this.engine.getDeltaTime() / 60;
     this._player_move(delta);
     this._player_rotate(delta);
+    this._player_shoot();
   };
 
   private _player_move = (delta: number) => {
@@ -131,5 +140,13 @@ export class Player {
     if (this.pressed_key.has(Key.E)) {
       this.mesh.rotation.y += delta * this.rotate_speed;
     }
+  };
+
+  private _player_shoot = () => {
+    if (!this.pressed_key.has(Key.SPACE)) return;
+    const bullet = new Bullet(this.scene, this.engine, {
+      position: this.mesh.position.clone(),
+      rotation: this.mesh.rotation.clone(),
+    });
   };
 }
