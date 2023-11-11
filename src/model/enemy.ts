@@ -19,5 +19,6 @@ export class Enemy {
     ) as StandardMaterialBox;
     this.mesh.material = new BABYLON.StandardMaterial("mat", scene);
     this.mesh.material.diffuseColor = BABYLON.Color3.Red();
+    this.mesh.actionManager = new BABYLON.ActionManager(scene);
   }
 }

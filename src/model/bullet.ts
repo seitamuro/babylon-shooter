@@ -2,6 +2,8 @@ import * as BABYLON from "@babylonjs/core";
 
 import { StandardMaterialSphere } from "../types";
 import { getRelativeDirection } from "../utils/getRelativeDirection";
+import { CollisionHandler } from "./collisionController";
+import { Enemy } from "./enemy";
 
 export type BulletParameters = {
   position?: BABYLON.Vector3;
@@ -17,7 +19,7 @@ const createBulletParameters = (params: BulletParameters) => {
   };
 };
 
-export class Bullet {
+export class Bullet implements CollisionHandler {
   mesh: StandardMaterialSphere;
   scene: BABYLON.Scene;
   engine: BABYLON.Engine;
@@ -47,6 +49,7 @@ export class Bullet {
     this.mesh.material.diffuseColor = BABYLON.Color3.Yellow();
     this.mesh.position = params.position ?? BABYLON.Vector3.Zero();
     this.mesh.rotation = params.rotation ?? BABYLON.Vector3.Zero();
+    this.mesh.actionManager = new BABYLON.ActionManager(scene);
 
     this.scene.onBeforeRenderObservable.add(() => {
       this._move(this.engine.getDeltaTime() / 60);
@@ -61,5 +64,14 @@ export class Bullet {
         this.mesh.rotation
       ).scaleInPlace(delta * this.speed)
     );
+  };
+
+  collisionHandler = (other: any) => {
+    console.log("hit");
+    if (other instanceof Enemy) {
+      console.log("hit enemy");
+      this.mesh.dispose();
+      return;
+    }
   };
 }

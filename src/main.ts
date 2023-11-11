@@ -14,6 +14,7 @@ import { Player } from "./model/player";
 import { Bullet } from "./model/bullet";
 import { StandardMaterialBox } from "./types";
 import { Enemy } from "./model/enemy";
+import { CollisionController } from "./model/collisionController";
 
 /**
  * Setup Scene , Camera and etc
@@ -34,6 +35,8 @@ camera.attachControl(canvas, true);
 
 const light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
 light.intensity = 0.7;
+
+const collisionController = new CollisionController();
 
 /**
  * Create Meshes
@@ -123,6 +126,7 @@ scene.onBeforeRenderObservable.add(() => {
  */
 engine.runRenderLoop(() => {
   scene.render();
+  collisionController.applyCollision();
 });
 
 window.addEventListener("resize", () => {
