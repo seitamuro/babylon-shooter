@@ -16,7 +16,6 @@ export class PlayerCamera {
     this.engine = engine;
     this.camera.rotation = target.mesh.rotation.clone();
 
-    console.log(offset.length());
     scene.onBeforeRenderObservable.add(() => {
       this.camera.position = getRelativeDirection(
         offset.clone(),
