@@ -22,12 +22,14 @@ export class Bullet {
   scene: BABYLON.Scene;
   engine: BABYLON.Engine;
   speed: number;
+  static bullets: Bullet[] = [];
 
   constructor(
     scene: BABYLON.Scene,
     engine: BABYLON.Engine,
     params: BulletParameters = {}
   ) {
+    Bullet.bullets.push(this);
     this.scene = scene;
     this.engine = engine;
     this.speed = params.speed ?? 1;

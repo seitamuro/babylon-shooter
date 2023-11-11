@@ -48,6 +48,7 @@ const cbox1 = MeshBuilder.CreateBox(
 ) as StandardMaterialBox;
 cbox1.material = new BABYLON.StandardMaterial("mat", scene);
 cbox1.actionManager = new BABYLON.ActionManager(scene);
+
 const cbox2 = MeshBuilder.CreateBox(
   "box1",
   { size: 1 },
