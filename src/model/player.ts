@@ -21,6 +21,8 @@ export class Player {
   scene: BABYLON.Scene;
   move_speed: number = 0.5;
   rotate_speed: number = 0.2;
+  shoot_timer: number = 0;
+  shoot_interval: number = 5;
 
   constructor(scene: BABYLON.Scene, engine: BABYLON.Engine) {
     this.pressed_key = new Set();
@@ -44,6 +46,11 @@ export class Player {
     // event listener
     scene.onKeyboardObservable.add(this._keyboard_event_callback);
     scene.onBeforeRenderObservable.add(this._before_render_callback);
+
+    // timer
+    scene.onBeforeRenderObservable.add(() => {
+      this.shoot_timer += engine.getDeltaTime() / 60;
+    });
   }
 
   // Event Callbacks
@@ -144,9 +151,12 @@ export class Player {
 
   private _player_shoot = () => {
     if (!this.pressed_key.has(Key.SPACE)) return;
-    const bullet = new Bullet(this.scene, this.engine, {
-      position: this.mesh.position.clone(),
-      rotation: this.mesh.rotation.clone(),
-    });
+    if (this.shoot_interval < this.shoot_timer) {
+      const bullet = new Bullet(this.scene, this.engine, {
+        position: this.mesh.position.clone(),
+        rotation: this.mesh.rotation.clone(),
+      });
+      this.shoot_timer = 0;
+    }
   };
 }
