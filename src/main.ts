@@ -16,6 +16,7 @@ import { StandardMaterialBox } from "./types";
 import { Enemy } from "./model/enemy";
 import { CollisionController } from "./model/collisionController";
 import { PlayerCamera } from "./model/camera";
+import { EnemyGenerator } from "./model/EnemyGenerator";
 
 /**
  * Setup Scene , Camera and etc
@@ -46,6 +47,7 @@ const field = new Field(scene, engine);
 const player = new Player(scene, engine);
 const camera = new PlayerCamera(scene, engine, player);
 const enemy = new Enemy(scene, engine);
+const enemyGenerator = new EnemyGenerator(scene, engine);
 
 /**
  * Render Loop
@@ -53,6 +55,7 @@ const enemy = new Enemy(scene, engine);
 engine.runRenderLoop(() => {
   scene.render();
   collisionController.applyCollision();
+  enemyGenerator.update();
 });
 
 window.addEventListener("resize", () => {
