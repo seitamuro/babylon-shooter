@@ -47,6 +47,7 @@ const cbox1 = MeshBuilder.CreateBox(
   scene
 ) as StandardMaterialBox;
 cbox1.material = new BABYLON.StandardMaterial("mat", scene);
+cbox1.actionManager = new BABYLON.ActionManager(scene);
 const cbox2 = MeshBuilder.CreateBox(
   "box1",
   { size: 1 },
@@ -64,7 +65,6 @@ cbox2.actionManager.registerAction(
     },
     () => {
       cbox2.material.diffuseColor = BABYLON.Color3.Red();
-      console.log("enter");
     }
   )
 );
@@ -78,7 +78,32 @@ cbox2.actionManager.registerAction(
     },
     () => {
       cbox2.material.diffuseColor = BABYLON.Color3.White();
-      console.log("exit");
+    }
+  )
+);
+cbox1.actionManager.registerAction(
+  new BABYLON.ExecuteCodeAction(
+    {
+      trigger: BABYLON.ActionManager.OnIntersectionEnterTrigger,
+      parameter: {
+        mesh: player.mesh,
+      },
+    },
+    () => {
+      cbox1.material.diffuseColor = BABYLON.Color3.Red();
+    }
+  )
+);
+cbox1.actionManager.registerAction(
+  new BABYLON.ExecuteCodeAction(
+    {
+      trigger: BABYLON.ActionManager.OnIntersectionExitTrigger,
+      parameter: {
+        mesh: player.mesh,
+      },
+    },
+    () => {
+      cbox1.material.diffuseColor = BABYLON.Color3.White();
     }
   )
 );
