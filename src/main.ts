@@ -15,6 +15,7 @@ import { Bullet } from "./model/bullet";
 import { StandardMaterialBox } from "./types";
 import { Enemy } from "./model/enemy";
 import { CollisionController } from "./model/collisionController";
+import { PlayerCamera } from "./model/camera";
 
 /**
  * Setup Scene , Camera and etc
@@ -29,9 +30,9 @@ scene.enablePhysics(
   new CannonJSPlugin(true, 10, CANNON)
 );
 
-const camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
-camera.setTarget(Vector3.Zero());
-camera.attachControl(canvas, true);
+//const camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
+//camera.setTarget(Vector3.Zero());
+//camera.attachControl(canvas, true);
 
 const light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
 light.intensity = 0.7;
@@ -43,6 +44,7 @@ const collisionController = new CollisionController();
  */
 const field = new Field(scene, engine);
 const player = new Player(scene, engine);
+const camera = new PlayerCamera(scene, engine, player);
 const bullet = new Bullet(scene, engine);
 
 const cbox1 = MeshBuilder.CreateBox(
