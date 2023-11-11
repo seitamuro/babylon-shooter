@@ -12,6 +12,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babylonjs/gui@npm:^6.29.1":
+  version: 6.29.1
+  resolution: "@babylonjs/gui@npm:6.29.1"
+  peerDependencies:
+    "@babylonjs/core": ^6.0.0
+  checksum: 9169339c114bc162d38fa7b1be53b8335a7170e3241239ee6278bff965f212e4bf14b5d1b4de7fb03c2fdea2abb3fab37b03d3d257e8391ff270654427e3d6c5
+  languageName: node
+  linkType: hard
+
 "@discoveryjs/json-ext@npm:^0.5.0":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
@@ -3963,6 +3972,7 @@ __metadata:
   resolution: "three-js-with-yarn@workspace:."
   dependencies:
     "@babylonjs/core": ^6.28.1
+    "@babylonjs/gui": ^6.29.1
     "@types/babylonjs": ^2.4.1
     "@types/cannon": ^0.1.12
     cannon: ^0.6.2

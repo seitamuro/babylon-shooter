@@ -17,6 +17,7 @@ import { Enemy } from "./model/enemy";
 import { CollisionController } from "./model/collisionController";
 import { PlayerCamera } from "./model/camera";
 import { EnemyGenerator } from "./model/EnemyGenerator";
+import { GUI } from "./model/GUI";
 
 /**
  * Setup Scene , Camera and etc
@@ -30,6 +31,7 @@ scene.enablePhysics(
   new Vector3(0, -9.81, 0),
   new CannonJSPlugin(true, 10, CANNON)
 );
+const gui = new GUI(scene, engine);
 
 //const camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
 //camera.setTarget(Vector3.Zero());
@@ -55,6 +57,7 @@ engine.runRenderLoop(() => {
   scene.render();
   collisionController.applyCollision();
   enemyGenerator.update();
+  gui.update();
 });
 
 window.addEventListener("resize", () => {

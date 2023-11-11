@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@babylonjs/core": "^6.28.1",
+    "@babylonjs/gui": "^6.29.1",
     "cannon": "^0.6.2"
   }
 }
