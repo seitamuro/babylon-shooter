@@ -12,6 +12,7 @@ import "./style.css";
 import { Field } from "./model/field";
 import { Player } from "./model/player";
 import { Bullet } from "./model/bullet";
+import { StandardMaterialBox } from "./types";
 
 /**
  * Setup Scene , Camera and etc
@@ -37,11 +38,57 @@ light.intensity = 0.7;
  * Create Meshes
  */
 const field = new Field(scene, engine);
-interface MyBox extends BABYLON.Mesh {
-  material: BABYLON.StandardMaterial;
-}
 const player = new Player(scene, engine);
 const bullet = new Bullet(scene, engine);
+
+const cbox1 = MeshBuilder.CreateBox(
+  "box1",
+  { size: 1 },
+  scene
+) as StandardMaterialBox;
+cbox1.material = new BABYLON.StandardMaterial("mat", scene);
+const cbox2 = MeshBuilder.CreateBox(
+  "box1",
+  { size: 1 },
+  scene
+) as StandardMaterialBox;
+cbox2.material = new BABYLON.StandardMaterial("mat", scene);
+cbox2.actionManager = new BABYLON.ActionManager(scene);
+cbox2.actionManager.registerAction(
+  new BABYLON.ExecuteCodeAction(
+    {
+      trigger: BABYLON.ActionManager.OnIntersectionEnterTrigger,
+      parameter: {
+        mesh: cbox1,
+      },
+    },
+    () => {
+      cbox2.material.diffuseColor = BABYLON.Color3.Red();
+      console.log("enter");
+    }
+  )
+);
+cbox2.actionManager.registerAction(
+  new BABYLON.ExecuteCodeAction(
+    {
+      trigger: BABYLON.ActionManager.OnIntersectionExitTrigger,
+      parameter: {
+        mesh: cbox1,
+      },
+    },
+    () => {
+      cbox2.material.diffuseColor = BABYLON.Color3.White();
+      console.log("exit");
+    }
+  )
+);
+
+let cnt = 0;
+scene.onBeforeRenderObservable.add(() => {
+  cnt += engine.getDeltaTime() / 60;
+  cbox1.position.x = Math.sin(cnt * 0.1) * 5;
+  cbox2.position.x = -Math.sin(cnt * 0.1) * 5;
+});
 
 /**
  * Render Loop
