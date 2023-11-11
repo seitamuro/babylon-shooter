@@ -67,10 +67,10 @@ export class Bullet implements CollisionHandler {
   };
 
   collisionHandler = (other: any) => {
-    console.log("hit");
     if (other instanceof Enemy) {
-      console.log("hit enemy");
       this.mesh.dispose();
+      const idx = Bullet.bullets.indexOf(this);
+      Bullet.bullets.splice(idx, 1);
       return;
     }
   };
