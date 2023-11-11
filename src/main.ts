@@ -13,6 +13,7 @@ import { Field } from "./model/field";
 import { Player } from "./model/player";
 import { Bullet } from "./model/bullet";
 import { StandardMaterialBox } from "./types";
+import { Enemy } from "./model/enemy";
 
 /**
  * Setup Scene , Camera and etc
@@ -108,6 +109,7 @@ cbox1.actionManager.registerAction(
     }
   )
 );
+const enemy = new Enemy(scene, engine);
 
 let cnt = 0;
 scene.onBeforeRenderObservable.add(() => {
