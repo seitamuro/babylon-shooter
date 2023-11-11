@@ -11,6 +11,7 @@ import * as BABYLON from "@babylonjs/core";
 import "./style.css";
 import { Field } from "./model/field";
 import { Player } from "./model/player";
+import { Bullet } from "./model/bullet";
 
 /**
  * Setup Scene , Camera and etc
@@ -40,6 +41,7 @@ interface MyBox extends BABYLON.Mesh {
   material: BABYLON.StandardMaterial;
 }
 const player = new Player(scene, engine);
+const bullet = new Bullet(scene, engine);
 
 /**
  * Render Loop
