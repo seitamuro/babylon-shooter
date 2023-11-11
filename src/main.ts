@@ -39,9 +39,6 @@ const field = new Field(scene, engine);
 interface MyBox extends BABYLON.Mesh {
   material: BABYLON.StandardMaterial;
 }
-const box = MeshBuilder.CreateBox("box", { size: 1 }, scene) as MyBox;
-box.material = new BABYLON.StandardMaterial("mat", scene);
-box.material.diffuseColor = BABYLON.Color3.Red();
 const player = new Player(scene, engine);
 
 /**
