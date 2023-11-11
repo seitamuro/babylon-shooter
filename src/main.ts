@@ -45,7 +45,6 @@ const collisionController = new CollisionController();
 const field = new Field(scene, engine);
 const player = new Player(scene, engine);
 const camera = new PlayerCamera(scene, engine, player);
-const bullet = new Bullet(scene, engine);
 const enemy = new Enemy(scene, engine);
 
 /**
