@@ -6,7 +6,9 @@ import { Field } from "../model/field";
 import { PlayerCamera } from "../model/camera";
 import { GUI } from "../model/GUI";
 
-export class MainGameScene {
+import { Scene } from "./Scene";
+
+export class MainGameScene implements Scene {
   private _scene: BABYLON.Scene;
   private _engine: BABYLON.Engine;
   private _light: BABYLON.HemisphericLight;
