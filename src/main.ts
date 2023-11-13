@@ -1,6 +1,7 @@
 import { Engine } from "@babylonjs/core";
 import "./style.css";
 import { MainGameScene } from "./scene/MainGame";
+import { SceneManager } from "./scene/SceneManager";
 
 /**
  * Setup Scene , Camera and etc
@@ -13,13 +14,13 @@ const engine = new Engine(canvas, true);
 /**
  * load scene
  */
-const main_game = new MainGameScene(engine);
+const sceneManager = new SceneManager(engine);
 
 /**
  * Render Loop
  */
 engine.runRenderLoop(() => {
-  main_game.render();
+  sceneManager.render();
 });
 
 window.addEventListener("resize", () => {
